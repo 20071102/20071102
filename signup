@@ -1,50 +1,18 @@
 <!DOCTYPE html>
-<html>
 <head>
-<title>ログイン/サインアップ</title>
-<link rel="stylesheet" type="text/css" href="style.css">
+<title> アカウント作成</tiltle>
 </head>
 <body>
-<div id="authContainer">
-<h2>ログイン/サインアップ</h2>
-<form id="authForm">
-<label for="username">ユーザー名:</label>
-<input type="text" id="username" name="username" required maxlength="25" pattern="[a-z0-9_&!?]*"><br><br>
-<label for="password">パスワード:</label>
-<input type="password" id="password" name="password" required maxlength="20" pattern="[A-Za-z0-9_!?#¥$%&+=]*"><br><br>
-<input type="submit" value="ログイン/サインアップ">
+<form method="post" action="test.html">
+<p>名前</p>
+<input type="text" maxlength="10" placeholder="太郎">
+<P>ユーザー名</p>
+<input type="text" maxlength="25" placeholder="Taro1234">
+<p>パスワード</P>
+<input type="password" maxlength="256" placeholder="Taro123456">
+<p>生年月日</P>
+<input type="date" name="calender" min="1900-01-01" max="2099-12-31">
+<p><input type="submit" value="アカウント作成する"></p>
 </form>
-<p id="message"></p>
-</div>
-<script src="script.js"></script>
 </body>
 </html>
-
-const authForm = document.getElementById("authForm");
-const message = document.getElementById("message");
-authForm.addEventListener("submit", function(event) {
-event.preventDefault();
-const username = authForm.username.value;
-const password = authForm.password.value;
-//サインアップ/ログインの処理
-//・・・
-message.textContent = "ログイン/サインアップが成功しました。";
-});
-
-body {
-font-family: Arial, sans-serif
-text-align: center;
-margin: 0;
-padding: 0;
-}
-#authContainer {
-display: inline-block;
-text-align: left;
-padding: 20px;
-border: 1px solid #ccc;
-border-radius: 3px;
-}
-#message {
-margin-top: 10px
-color: green;
-}
