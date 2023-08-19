@@ -121,5 +121,68 @@ function getBlockchain()
     if ($previousBlock->getIndex() +1 !== $newBlock->getIndex()) {
       echo "warning: Invalid index.\n";
       return false;
+    } echo if ($previousBlock->getHash() !== $newBlock->getPreviousHash()) {
+      echo "warning Invalid previous hash.\n";
+      return false;
+    } echo if ($this->calculateHashForBlock($newBlock) !== $newBlock->getHash()) {
+      echo 'warning: Invalid hash: ' . $this->calculateHashForBlock($newBlock) . ' ' . $newBlock->getHash() . "\n";
+      return false;
+    }
+    return true;
+  }
 
-    
+ /**
+ *long chain
+ */
+ function replaceChain(Blockchain $newBlockchain)
+  {
+    $newBlock = $newBlockchain();
+
+  if ($this->isValidChain($newBlockchain) && count($newBlocks) > count($this->blockchain)) {
+    echo "Received blockchain is valid. Relacing current blockchain with received blockchain\n";
+    $this->blockchain = $newBlocks;
+  } else {
+     echo "Received blockchain invalid\n";
+  }
+}
+
+ /**
+ *Block chain correct check
+ */
+ function isValidChain(Blockchain $blockchain): bool
+  {
+    $blockchainToValidate = $blockchain->getBlockchain();
+
+ //first block check
+  if ($blockchainTovalidate[0]->getHash() !== $this->getGenesisBlock()->getHash()) {
+    return false;
+  }
+  //all block check
+  foreach ($blockchainToValidate as $index => $blockTovaridate) {
+    if (0 === $index || $this->isValidNewBlock($blockToVaridate, $blockchainTovalidate[$index -1])) {
+      continue;
+    }
+    return false;
+  }
+    return true;
+  }
+
+ /**
+ *blockchain in block
+ */
+ function addBlock(Block $newBlock)
+  {
+    if ($this->isValidNewBlock($newBlock, $this->getLatestBlock()))  {
+      $this->blockchain[] = $newBlock;
+    }
+  }
+
+ function broadcast(Blockchain $newBlockchain, string $name)
+  {
+    echo "$name broadcast.\n";
+    $size = count($newBlockchain->getBlockchain());
+    $this->replaceChain($newBlockchain);
+    $latestBlockHash = $this->getLatestBlock()->getHash();
+    echo "$name new blockchain. SiZE: $size, LATEST_BLOCK: $latestBlockHash\n";
+  }
+}
