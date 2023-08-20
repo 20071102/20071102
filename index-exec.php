@@ -16,4 +16,20 @@ function createMiner(Blockchain &$masterBlockchain,string $name)
       $blockCount = rand(1,5);
       for ($i = 0; $i < $blockCount; $i++) {
         //block plus
-        $newBlock =
+        $newBlock = $myBlockchain->generateNextBlock('dummy_block_data');
+        $newBlockHash = $newBlock->getHash();
+        $myBlockchain->addBlock($newBlock);
+        echo "$name add block. BLOCK: $newBlockHash\n";
+      }
+      //new block create play
+      $masterBlockchain->broadcast($myBlockchain, $name);
+    });
+  }
+
+echo "=== START SIMULATE ===\n";
+
+Loop::run(function () use ($masterBlockchain) {
+  createMiner($masterBlockchain, 'Miner1');
+  createMiner($masterBlockchain, 'Miner2');
+  createMiner($masterBlockchain, 'Miner3');
+});
