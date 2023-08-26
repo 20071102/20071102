@@ -1,4 +1,4 @@
-usclass Block {
+class Block {
 
  constructor(index, previousHash,timetamp, data, hash) {
  this.index = index;
@@ -62,9 +62,12 @@ var initHttpServer = () => {
   res.send();
  });
  app.get('/peers', (req, res) => {
-  res.send
-
-
-
-
+  res.send(sockets.map(s => s._socket.remoteAddress + ':' + s._socket.remotePort));
+ });
+ app.post('/addpeer', (req, res) => {
+  connectToPeers([req.body.peer]);
+  res.send();
+ });
+ app.listen(http_port, () => console.log('Listening http on port: ' + http_port));
+ };
 }
