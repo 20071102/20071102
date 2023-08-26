@@ -1,4 +1,4 @@
-class Block {
+usclass Block {
 
  constructor(index, previousHash,timetamp, data, hash) {
  this.index = index;
@@ -30,6 +30,41 @@ var isValidNewBlock = (newBlock, previousBlock) => {
   console.log('invalid index');
   return false;
  } else if (previousBlock.hash !== newBlock.previousHash) {
-    console.log('invalid 
+    console.log('invalid previoushash');
+    return false;
+ } else if (calculateHashForBlock(newBlock) ! == newBlock.hash) {
+    console.log('invalid hash: ' + calculateHashForBlock(newBlock) + ' ' + newBlock.hash);
+    return false;
+  }
+ return ture;
+ };
+
+var replaceChain = (newBlocks) => {
+ if (isValidChain(newBlock) && newBlock.length > blockchain.length) {
+  console.log('Received blockchain is valid. Replacing currrent blockchain with received blockchain');
+  blockchain = newBlock;
+  broadcast(responseLatestMsg());
+ } else {
+    console.log('Reeived blockchain invalid');
+  }
+ };
+
+var initHttpServer = () => {
+ var app = express();
+ app.use(bodyParser.json());
+
+ app.get('/block' , (req, res) => res.send(JSON.stringity(blockchain)));
+ app.post('/mineBlock' , (req, res) => {
+  var newBlock = generateNextBlock(req.body.data);
+  addBlock(newBlock);
+  broadcast(responseLatesMsg());
+  console.log('block added: ' + JSON.stringify(newBlock));
+  res.send();
+ });
+ app.get('/peers', (req, res) => {
+  res.send
+
+
+
 
 }
