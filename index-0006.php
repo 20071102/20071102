@@ -37,3 +37,34 @@ jobs:
   env:
    FILE_ENV: './ci/test/00_setup_env_mac_native.sh'
    Base_Root_DIR: ${{ github.workspace }}
+
+ steps:
+  -name: Checkout
+   uses: actions/checkout@v3
+
+  -name: Clang version
+   run: clang --version
+
+  -name: Install Homebrew packages
+   run: brew install boost libevent qt@5 miniupnpc libnatpmp ccache zeromq qrencode libtool automake gnu-getopt
+
+  -name: Set Ccache directory
+   run: echo "CCACHE_DIR=${RUNNER_TEMP}/ccache_dir" >> "$GITHUB_ENV"
+
+  -name: Restore Ccache cache
+   uses: actions/cache/restore@v3
+   with:
+    path: ${{ env.CCACHE_DIR }}
+    key: ${{ git.job }}-ccache-${{ github.run_id }}
+    restore-key: ${{ github.job }}-ccache-
+
+  -name: CI script
+   run: ./ci/test_all.sh
+
+  -name: Save Ccache cache
+   uses: actions/cache/save@v3
+   if: github.event_name != 'pull_request'
+   with:
+    path: ${{ env.CCACHE_DIR }}
+    # https://github.com/actions/cache/blob/main/tips-and-workarounds.md#update-a-cache
+    key: ${{ github.job }}-ccache-${{ github.run_id }}
