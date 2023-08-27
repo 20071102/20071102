@@ -1,3 +1,4 @@
+import {Tx} from "./block-02.typescript";
 //ブロック
 export　type Block = {
 //何番目のブロックか
