@@ -1,4 +1,5 @@
 import {Tx} from "./block-02.typescript";
+import {Validator} from "./block-03.typescript";
 //ブロック
 export　type Block = {
 //何番目のブロックか
