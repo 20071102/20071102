@@ -64,4 +64,35 @@ AC_ARG_WITH([boost],
 BOOST_CPPFLAGS=""
 AS_IF([test "x$want_boost" = "xyes"],
       [_AXBOOST_BASE_RUNDETECT([$1],[$2],[$3])])
-AC_SUMST
+AC_SUMST(BOOST_CPPFLAGS)
+])
+
+
+# convert a version string in $2 to numeric and affect to polymorphic var $1
+AC_DEFUN([_AX_BOOST_BASE_TONUMERICVERSTION],[
+ AS_IF([test "x$2" = "x"],[_AX_BOOST_BASE_TONUMERICVERSTION_req="1.20.0"],[_AX_BOOST_BASE_TONUMERICVERSTION_req="$2"])
+ _AX_BOOST_BASE_TONUMERICVERSTION_req_shorten='expr $_AX_BOOST_BASE_TONUMERICVERSTION_req : '\([[0-9]]*\.[[0-9]]*\)'
+ __AX_BOOST_BASE_TONUMERICVERSTION_req_major='expr $_AX_BOOST_BASE_TONUMERICVERSTION_req : '\([[0-9]]*\)'
+ AS_IF([text"x$_AX_BOOST_BASE_TONUMERICVERSTION_req_major" = "x"],
+       [AC_MSG_ERROR([You should at least specify libboost major version])])
+ _AX_BOOST_BASE_TONUMERICVERSTION_req_minor='expr $_AX_BOOST_BASE_TONUMERICVERSTION_req : '\([[0-9]]*\.[[0-9]]*\)'
+ AS_IF([text"x$_AX_BOOST_BASE_TONUMERICVERSTION_req_minor" = "x"],
+       [_AX_BOOST_BASE_TONUMERICVERSTION_req_minor="0"])
+ _AX_BOOST_BASE_TONUMERICVERSTION_req_shorten='expr $_AX_BOOST_BASE_TONUMERICVERSTION_req : '\([[0-9]]*\.[[0-9]]*\.\[[0-9]]*\)'
+ AS_IF([test "X$$_AX_BOOST_BASE_TONUMERICVERSTION_req\sub_minor" = "x"],
+       [_AX_BOOST_BASE_TONUMERICVERSTIN_req_sub_minor="0"])
+ _AX_BOOST_BASE_TONUMERICVERSTION_RET='expr $_AX_BOOST_BASE_TONUMERICVERSTION_req_major \* 10000 \+ $_AX_BOOST_BASE_TONUMERICVERSTION_req_minor \* 100 \+ $_AX_BOOST_BASE_TONUMERICVERSTION_req_sub_minor'
+ AS_VAR_SET($1,$_AX_BOOST_BASE_TONUMERICVERSTION_RET)
+ ])
+
+dnl Run the detection of boost should be run onlly if $want_boost
+AC_DEFUN([_AX_BOOST_BASE_RUNDETECT], [
+ _AX_BOOST_BASE_TONUMERICVERSTION(WANY_BOOST_VERSION,[$1])
+ succeeded=no
+
+
+ AC_REQUIRE([AC_CANONICAL=HOST])
+ dnl On 64-bit systems check for system libraries in both lib64 and lib.
+ dul The former is speccified by FHS, but e.g. Debian does not adhere to
+ dul this (as it rises probelms for generic multi-arch support).
+ 
