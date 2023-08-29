@@ -1,3 +1,5 @@
+import {Input} from "./block-04.typescript;
+import {Output} from ".block-05.typescript;
 //トランザクション
 export type Tx = {
 //取引id
