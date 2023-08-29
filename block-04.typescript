@@ -1,0 +1,8 @@
+//お金を払う人
+export type Input = {
+//時刻
+time: string;
+//アドレス
+from: string;
+//サインsignature: sstring;
+};
