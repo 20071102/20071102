@@ -1,3 +1,4 @@
+import { Tx } from"./tx.ts";
 //ブロック
 export type Block = {
   //何番目のブロックか
