@@ -1,92 +1,85 @@
-name: Bug report
-descripton: Submit a new bug report.
-labels: [bug]
-body:
- - type: markdown
-  attributes:
-  value:
-   ## This issue trcker is only for technical issues related to Bitcoin Core.
+<?php
 
- * General bitcoin questions and/or suupport requests should usse Bitcoin StackExchange at https://bitcoin.stackexchange.com.
- * For reporting security issues, please reaqd instructions at https://bitcoin.org/en/contact/.
- * If the node is "Stuck" during sync or giving "block checksum mismatch" errors, please ensure your hardwere is stable by running 'memtest' and observe CPU temperature with a load-test tool such as 'linpack' before creating an issue.
+class Block
+ {
+  Private $index;
+  Private $previousHash;
+  Private $timestamp;
+  Private $data;
+  Private $hash;
 
- ____
- - type: checkboxes
-  attributes:
-  label: Is there an eisting issue for this?
-  description: Please search to see if an issue already exists for the bug you encountered.
-  options:
- - label: I have searchedthe existing issues
-  required: true
- - type: textarea
-  id: current-behaviour
-  attributes:
-  label: Current behaviour
-  description: Tell us whatwent wrong
- validations:
-  required: true
- - type: textarea
-  id: exppected-behaviour
-  attributes:
-  label: Expected behaviour
-  description: Tell us what yo  expeected to happen
- validations:
-  required: true
- - type textarea
-  id: reproduction-steps
-  attributes:
-   label: Steps to reproduce
-   description:
-    Tell us how to reproduce your bug. Please attach related screenshots if necessary.
-    * Run-time or compile-time configuration options
-    * Actions taken
- validations:
-  required: true
- - type texterea
-  id: logs
-  attributes:
-  label: Relevant log output
-  description:|
-   please copy and paste any relevant log ooutput or attach a debug log file.
+  function __construct($index, $previousHash, $timestamp, $data, $hash)
+  {
+   $this->index = $index;
+   $this->previousHash = $privoiusHash;
+   $this->timestamp = $timestamp;
+   $this->data = $data;
+   $this->hash = $hash;
+   }
+  
+  function getIndex()
+  {
+   return $this->index;
+   }
 
-   You can find the debug.log in your [data dir.](https://github.com/bitcoin/bitcoin/blob/master/doc/files.md#data-directory-location)
+  function getPreviousHash()
+  {
+   return $this->previousHash;
+   }
 
-   Please beaware that the debug log might  contain personally identifying information.
- validations:
-  required: false
- - type dropdown
-  attributes:
-   label: How did you obtion Bitcoin Core
-   multiple: false
-   options:
-    - Comiled form  source
-    - Pre-built binaries
-    - Package manager
-    - other
-  valdations:
-    required:
- - type: input
-  id core-version
-  attributes:
-   label: what version of Bitcoin Core are you using?
-   descriptoin: Run 'bitcoind --version' or in Bitcoin-QT use 'Help > About Bitcoin Core'
-   placeholder: e.g. v24.0.1 or master@e1bf547
-  validations:
-   required: true
- - type: input
-   id: os
-   attributes:
-    label: Operating system and version
-    placeholder: e.g. "MacOS Ventura 13.2" or "Ubuntu 22.04 LTS"
-   validations:
-    required: true
- - type texterea
-   id: machine specifications
-   attributes:
-    label: Machine specifications
-    description:
-      What are the speeccifications
-      e.g. OS/CPU and disk type, network connectivity
-   validations:
-     required: false
+  function getTimestamp()
+  {
+   return $this->timestamp;
+   }
+
+  function getData()
+  {
+   return $this->data;
+   }
+
+  function getHash()
+  {
+   return $this->hash;
+   }
+ }
+
+class Blockchain
+ {
+  privater $blockchain = [];
+
+  function __construct()
+  {
+   $this->blockchain[] = $this->getGenesisBlock();
+   }
+
+  function getBlockchain()
+  {
+   return $this->blockchain;
+   }
+
+  /**
+   *最初のブロック生成取得
+　 */
+ function getGenesisBlock(): Block
+  {
+   return new Block(
+    0,
+    '0',
+    146514705,
+    'my genesis block!!',
+    '881653492c2b7154836da6afc367695e6337db8a921823784c14378abed4f7d7'
+    );
+  }
+
+  /**
+   *ハッシュ生成
+　 */
+  function calculateHash($index, $previousHash, $timestamp, $data)
+  {
+   return hash('SHA256', $index + $previousHash + $timestamp + $data);
+   }
+
+   /**
+    *ブロックからハッシュを生成
+　  */
+   function
