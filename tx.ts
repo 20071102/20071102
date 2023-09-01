@@ -1,3 +1,5 @@
+import { Input } from"./input.ts";
+import { Output } from"./output.ts";
 //トランザクション
 export type TX = {
   //取引id
