@@ -1,4 +1,5 @@
-type Block = {
+//ブロック
+export type Block = {
   //何番目のブロックか
   index: number;
   //ブロックを作った時間
