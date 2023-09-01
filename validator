@@ -1,0 +1,9 @@
+//ブロックをチェックするバリデータ
+export type Validator = {
+ //アドレス
+ addr' string;
+ //サイン
+ signature' string;
+ //かけ金
+ token: number;
+};
