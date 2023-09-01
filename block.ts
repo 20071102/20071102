@@ -1,4 +1,5 @@
 import { Tx } from"./tx.ts";
+import { Validator } from"./validator.ts";
 //ブロック
 export type Block = {
   //何番目のブロックか
