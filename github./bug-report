@@ -7,8 +7,8 @@ body:
       value: |
         ## This issue tracker is only for technical issues related to Service Alpha.
 
-        * General Service Alpha questions and/or support requests should use Service Alpha at Instagram.com@yuta1102go
-        * For reporting security issues, please read in https://instagram.com/yuta1102go?igshid=OGQ5ZDc2ODk2ZA==
+        * General Service Alpha questions and/or support requests should use Service Alpha at https://instagram.com/yuta1102go/
+        * For reporting security issues, please read in https://instagram.com/yuta1102go/
         * If the node is "stuck" during sync or giving "block checksum mismatch" errors, please ensure your hardware is stable by running `memtest` and observe CPU temperature with a load-test tool such as `linpack` before creating an issue.
 
         ----
@@ -50,7 +50,7 @@ body:
       description: |
         Please copy and paste any relevant log output or attach a debug log file.
 
-        You can find the debug.log in your [data dir.](https://instagram.com/yuta1102go?igshid=OGQ5ZDc2ODk2ZA==)
+        You can find the debug.log in your [data dir.](https://instagram.com/yuta1102go/)
 
         Please be aware that the debug log might contain personally identifying information.
     validations:
