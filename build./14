@@ -9,7 +9,7 @@
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\bitcoin-cli.cpp" />
+    <ClCompile Include="..\..\src\servicealpha-cli.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\libservicealpha_cli\libservicealpha_cli.vcxproj">
