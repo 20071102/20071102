@@ -9,10 +9,10 @@
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\bitcoin-util.cpp" />
+    <ClCompile Include="..\..\src\servicealpha-util.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\libbitcoin_consensus\libbitcoin_consensus.vcxproj">
+    <ProjectReference Include="..\libservicealpha_consensus\libservicealpha_consensus.vcxproj">
       <Project>{2b384fa8-9ee1-4544-93cb-0d733c25e8ce}</Project>
     </ProjectReference>
     <ProjectReference Include="..\libservicealpha_common\libservicealpha_common.vcxproj">
